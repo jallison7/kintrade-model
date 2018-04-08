@@ -1034,8 +1034,121 @@ The model creates an abstract landscape with a linear arrangement of villages. T
 
 ## HOW TO USE IT
 
-(how to use the model, including a description of each of the items in the Interface tab)
+The interface includes three buttons, 11 sliders for global variables defined and controlled from the interface, four plots, and one switch.
 
+The three buttons are standard for NetLogo: "setup", "step", and "run". To run the model, you first press setup, then (usually) the run button. "Run" will start the model, and it will run until it reaches the specified number of ticks (= start-exchange + exchange-length; see below). Pushing the run button while the simulation is running will pause the model. If you want to step through the model one tick at a time, you can use the step button.
+
+
+Global variables defined and controlled from the interface:
+
+nvillages -- the number of villages created during setup.
+
+village-size -- This is used to set the mean size of villages at the start. Actual 
+village size varies around the mean, as initial village populations are randomly drawn (separately for males and females) from a Poisson distribution.
+
+birth-probability -- this controls the birth rate (which should really be thought of as combining the birth rate and childhood mortality; i.e, it's equivalent to the number of children who survive to adulthood). Since potential maternity age is set as 16-40, birth-probability * 24 should be the mean number of children per married female
+
+max-marriage-radius -- the maximum distance (measured in number of villages away from the home village) from which potential spouses can come.
+
+start-exchange -- this sets the length of the burn-in period (in ticks) that creates the 
+kin network. The model runs for n = start-exchange ticks before production and exchange begin.
+
+exchange-length -- the time period (number of ticks) during which agents exchange goods. exchange-length + start-exchange = the total number of ticks for each run of the simulation.
+
+annual-production -- the number of pots each producer makes annually'
+
+annual-demand -- the maximum number of pots each consumer can acquire annually.
+
+exchange-threshold -- the number of pots an agent must possess before being willing to pass one along to a link-neighbor.
+
+Plots:
+
+There are four plots on the interface that allow some aspects of the simulation to be observed. The data in the plots is mostly useful for getting a genreal sense of whether things are working approximately as they are supposed to, and for visualizing major differences between runs of the model. The plots are not useful for detailed analysis (which I do either through NetLogo's BehaviorSpace tool or by detailed analysis of the files created by the output procedure [see below]).
+
+Plot 1 shows the total population at each step of the simulation. The main purpose of the plot is to show whether the population is growing, declining, or staying approximately the same.
+
+Plot 2 plots two lines showing the total numer of kin-links created between agents. One line shows the number of links within the same village or betwewen adjacent villages. This will always (or almost always?) be the higher line in the graph, since most links are relatively short.The second line shows the number of links with agents who reside more than one village away.
+
+Plot 3 shows a histogram of the number of kinship links individuals have, or, in network science terms, the degree distribution of the extended network created by the model. The x-axis shows the number of kinship links and the y-axis the number of individual agents with a given number of links. 
+
+Plot 4 shows the number of pots within each village. This will always be blank until the end of the burn-in period (controlled by the start-exchange slider). Once pottery production starts, it will plot the total number of pots currently in each village (including pots that belonged to deceased individuals). Generally there will be many pots in producing villages, then a decline in the number of pots with distance from the producing villages, but the decline is not always regular. Sometimes this can be due to demographic effects, especially when the total population size is small (when population is small, some villages may have few inhabitants or even die out altogether). Also, if pots are moving rapidly through the system (as they will with small values for exchange-threshhold and large values for annual-production and annual-demand), pots may pile up in the village at the end of the system (because the model doesn't allow them to move out of the system).
+
+
+Switch:
+
+full-output -- This is a switch that controls whether the model runs the output procedure. The output procedure produces three csv files for each run of the model with detailed information on agents, links, and pots produced. 
+
+With the switch off, it is easier to make large numbers of runs of the simulation (using NetLogo's BehaviorSpace tool, for instance), and collect aggregate data on how the model reacts to changes in parameters.
+
+The files created with the full-output command are intended to be useful for examining the details of individual runs of the model. The files created are named agentlist.csv, linklist.csv, and potlist.csv. 
+
+Agentlist.csv includes 19 variables, with one line of data for each individual agent still alive at the end of the simulation. The variables	are: 
+			1) the breed of the agent (reported as "males" or "females" because the breed names are plural); 
+
+2) the agent number; 
+
+3) the birth village; 
+
+4) the current village (birth village and current village will always be the same for females and children of either sex under the age of 16); 
+
+5) the number of pots owned by the agent at the end of the simulation
+
+6) the number of pots acquired by the agent then traded away before the end of the simulation
+
+7) age; 
+
+8) the agent number of the mother (if still living, "nobody" if the mother has died); 
+
+9) The agent number of the father (only if the father is still living, "nobody if the father has died); 
+
+10) the agent number of the spouse, if any (if the agent has never married, or if their spouse has died, it will be "nobody");
+
+11) the total number of kin links the agent has at the end of the simulation (parents, spouses, or other kin who died before the end of the simulation will not be counted);
+
+12) the total number of kin links the agent has that are to agents who live in other villages;
+
+13-19) the total number of links more than the specified number	of villages away from the village in which the agent lives (note for future revisions: it would be easier to work with these data	if this reports how many links are the specified number of villages away rather than how many are more than the specified number of villages away).
+
+Linklist.csv reports information about the links that connect the agents in the simulation. It reports eight columns of data about each link:
+
+1) The breed of the link. There are four possible breeds: 
+
+a) "marriages", for links between spouses; 
+
+b) "parents" for links between parents and children; 
+
+c) "siblings" for links between brothers and sisters (currently the model defines    siblings as agents who share the same mother, which means it recognizes full siblings	(who share both parents), and half-siblings from the same mother, but not half-siblings from the same father. This is something ethat should be fixed the next time the	model is revised); and 
+
+d) "in-laws" for anyone linked to an agent's spouse by one of the other three kinds of links.
+
+2) the breed of the agent at End1 of the link;
+
+3) the agent number of the agent at End1 of the link;
+
+4) the breed of the agent at End2 of the link;
+
+5) the agent numberof the agent at End2 of the link;
+
+6) the current village of the agent at End1:
+
+7) the current village of the agent at End2;
+
+8) the length of the link, measured in villages away (the absolute value of (column 6 -column 7)).
+
+
+The third file, potlist.csv, is designed to allow tracking of information about all the pots created during the simulation, although so far I have never used this information in any rigorous way. Potlist.csv reports 7 variables for each pot:
+
+1) the pot number (a unique identifier for each pot);
+
+2) the current village of the pot, in other words, where it ended up
+			
+3) "owner", the last owner of the pot (reported by a variable that stores the "who" number of the owner);
+
+4) "owner2", the last owner of the pot stored as an agent. This	overlaps with the information in "owner", except that, if the owner has died by the end of the simulation, it reports "nobody".This makes it easy to tell whether the owner has died (but probably isn't the best way to track or report that information).
+
+5) The source village of the pot, i.e., the village lived in by	the producer
+
+6-7) the producer of the pot, stored twice, once as the "who" number of the producer and once as the agent number, in the same way as information about the last owner is stored
 ## THINGS TO NOTICE
 
 (suggested things for the user to notice while running the model)
