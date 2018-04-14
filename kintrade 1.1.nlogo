@@ -861,7 +861,7 @@ max-marriage-radius
 max-marriage-radius
 1
 10
-6.0
+2.0
 1
 1
 NIL
@@ -928,7 +928,7 @@ exchange-length
 exchange-length
 0
 100
-0.0
+50.0
 1
 1
 NIL
@@ -1004,7 +1004,7 @@ SWITCH
 79
 full-output
 full-output
-0
+1
 1
 -1000
 
@@ -1487,7 +1487,6 @@ NetLogo 6.0
     <setup>setup</setup>
     <go>go</go>
     <timeLimit steps="150"/>
-    <metric>count marriages</metric>
     <metric>count parents with [abs (([current-village] of end1) - ([current-village] of end2)) = 0]</metric>
     <metric>count parents with [abs (([current-village] of end1) - ([current-village] of end2)) = 1]</metric>
     <metric>count parents with [abs (([current-village] of end1) - ([current-village] of end2)) = 2]</metric>
@@ -1534,152 +1533,18 @@ NetLogo 6.0
     <metric>count females with [current-village = 7]</metric>
     <metric>count males with [current-village = 8]</metric>
     <metric>count females with [current-village = 8]</metric>
-    <metric>count red-pots with [current-village = 1]</metric>
-    <metric>count red-pots with [current-village = 2]</metric>
-    <metric>count red-pots with [current-village = 3]</metric>
-    <metric>count red-pots with [current-village = 4]</metric>
-    <metric>count red-pots with [current-village = 5]</metric>
-    <metric>count red-pots with [current-village = 6]</metric>
-    <metric>count red-pots with [current-village = 7]</metric>
-    <metric>count red-pots with [current-village = 8]</metric>
-    <enumeratedValueSet variable="max-marriage-radius">
-      <value value="2"/>
-    </enumeratedValueSet>
+    <metric>count pots with [current-village = 1]</metric>
+    <metric>count pots with [current-village = 2]</metric>
+    <metric>count pots with [current-village = 3]</metric>
+    <metric>count pots with [current-village = 4]</metric>
+    <metric>count pots with [current-village = 5]</metric>
+    <metric>count pots with [current-village = 6]</metric>
+    <metric>count pots with [current-village = 7]</metric>
+    <metric>count pots with [current-village = 8]</metric>
     <enumeratedValueSet variable="village-size">
+      <value value="50"/>
       <value value="100"/>
       <value value="200"/>
-      <value value="500"/>
-    </enumeratedValueSet>
-  </experiment>
-  <experiment name="test" repetitions="1" runMetricsEveryStep="true">
-    <setup>setup</setup>
-    <go>go</go>
-    <timeLimit steps="50"/>
-    <metric>count males</metric>
-    <metric>count females</metric>
-    <metric>count males with [married?] = true</metric>
-    <metric>count links</metric>
-    <metric>count links with [link-length &gt; (village-spacing + 26)]</metric>
-    <enumeratedValueSet variable="max-marriage-radius">
-      <value value="250"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="nvillages">
-      <value value="8"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="death-probability">
-      <value value="0.05"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="village-size">
-      <value value="150"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="birth-probability">
-      <value value="0.17"/>
-    </enumeratedValueSet>
-  </experiment>
-  <experiment name="village size simplified" repetitions="20" runMetricsEveryStep="true">
-    <setup>setup</setup>
-    <go>go</go>
-    <timeLimit steps="100"/>
-    <metric>count links</metric>
-    <metric>count links with [abs (([current-village] of end1) - ([current-village] of end2)) = 1]</metric>
-    <metric>count links with [abs (([current-village] of end1) - ([current-village] of end2)) = 2]</metric>
-    <metric>count links with [abs (([current-village] of end1) - ([current-village] of end2)) = 3]</metric>
-    <metric>count links with [abs (([current-village] of end1) - ([current-village] of end2)) = 4]</metric>
-    <metric>count links with [abs (([current-village] of end1) - ([current-village] of end2)) = 5]</metric>
-    <metric>count links with [abs (([current-village] of end1) - ([current-village] of end2)) = 6]</metric>
-    <metric>count links with [abs (([current-village] of end1) - ([current-village] of end2)) = 7]</metric>
-    <metric>count males</metric>
-    <metric>count females</metric>
-    <enumeratedValueSet variable="max-marriage-radius">
-      <value value="280"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="nvillages">
-      <value value="8"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="death-probability">
-      <value value="0.05"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="village-size">
-      <value value="200"/>
-      <value value="500"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="birth-probability">
-      <value value="0.17"/>
-    </enumeratedValueSet>
-  </experiment>
-  <experiment name="village size marriage radius production test" repetitions="1" sequentialRunOrder="false" runMetricsEveryStep="false">
-    <setup>setup</setup>
-    <go>go</go>
-    <timeLimit steps="150"/>
-    <metric>count marriages</metric>
-    <metric>count parents with [abs (([current-village] of end1) - ([current-village] of end2)) = 0]</metric>
-    <metric>count parents with [abs (([current-village] of end1) - ([current-village] of end2)) = 1]</metric>
-    <metric>count parents with [abs (([current-village] of end1) - ([current-village] of end2)) = 2]</metric>
-    <metric>count parents with [abs (([current-village] of end1) - ([current-village] of end2)) = 3]</metric>
-    <metric>count parents with [abs (([current-village] of end1) - ([current-village] of end2)) = 4]</metric>
-    <metric>count parents with [abs (([current-village] of end1) - ([current-village] of end2)) = 5]</metric>
-    <metric>count parents with [abs (([current-village] of end1) - ([current-village] of end2)) = 6]</metric>
-    <metric>count parents with [abs (([current-village] of end1) - ([current-village] of end2)) = 7]</metric>
-    <metric>count siblings with [abs (([current-village] of end1) - ([current-village] of end2)) = 0]</metric>
-    <metric>count siblings with [abs (([current-village] of end1) - ([current-village] of end2)) = 1]</metric>
-    <metric>count siblings with [abs (([current-village] of end1) - ([current-village] of end2)) = 2]</metric>
-    <metric>count siblings with [abs (([current-village] of end1) - ([current-village] of end2)) = 3]</metric>
-    <metric>count siblings with [abs (([current-village] of end1) - ([current-village] of end2)) = 4]</metric>
-    <metric>count siblings with [abs (([current-village] of end1) - ([current-village] of end2)) = 5]</metric>
-    <metric>count siblings with [abs (([current-village] of end1) - ([current-village] of end2)) = 6]</metric>
-    <metric>count siblings with [abs (([current-village] of end1) - ([current-village] of end2)) = 7]</metric>
-    <metric>count in-laws with [abs (([current-village] of end1) - ([current-village] of end2)) = 0]</metric>
-    <metric>count in-laws with [abs (([current-village] of end1) - ([current-village] of end2)) = 1]</metric>
-    <metric>count in-laws with [abs (([current-village] of end1) - ([current-village] of end2)) = 2]</metric>
-    <metric>count in-laws with [abs (([current-village] of end1) - ([current-village] of end2)) = 3]</metric>
-    <metric>count in-laws with [abs (([current-village] of end1) - ([current-village] of end2)) = 4]</metric>
-    <metric>count in-laws with [abs (([current-village] of end1) - ([current-village] of end2)) = 5]</metric>
-    <metric>count in-laws with [abs (([current-village] of end1) - ([current-village] of end2)) = 6]</metric>
-    <metric>count in-laws with [abs (([current-village] of end1) - ([current-village] of end2)) = 7]</metric>
-    <metric>count males</metric>
-    <metric>count females</metric>
-    <metric>count males with [age &gt; 16]</metric>
-    <metric>count females with [age &gt; 16]</metric>
-    <metric>count males with [age &gt; 16 and not married?]</metric>
-    <metric>count females with [age &gt; 16 and not married?]</metric>
-    <metric>count males with [current-village = 1]</metric>
-    <metric>count females with [current-village = 1]</metric>
-    <metric>count males with [current-village = 2]</metric>
-    <metric>count females with [current-village = 2]</metric>
-    <metric>count males with [current-village = 3]</metric>
-    <metric>count females with [current-village = 3]</metric>
-    <metric>count males with [current-village = 4]</metric>
-    <metric>count females with [current-village = 4]</metric>
-    <metric>count males with [current-village = 5]</metric>
-    <metric>count females with [current-village = 5]</metric>
-    <metric>count males with [current-village = 6]</metric>
-    <metric>count females with [current-village = 6]</metric>
-    <metric>count males with [current-village = 7]</metric>
-    <metric>count females with [current-village = 7]</metric>
-    <metric>count males with [current-village = 8]</metric>
-    <metric>count females with [current-village = 8]</metric>
-    <metric>count red-pots with [current-village = 1]</metric>
-    <metric>count red-pots with [current-village = 2]</metric>
-    <metric>count red-pots with [current-village = 3]</metric>
-    <metric>count red-pots with [current-village = 4]</metric>
-    <metric>count red-pots with [current-village = 5]</metric>
-    <metric>count red-pots with [current-village = 6]</metric>
-    <metric>count red-pots with [current-village = 7]</metric>
-    <metric>count red-pots with [current-village = 8]</metric>
-    <enumeratedValueSet variable="max-marriage-radius">
-      <value value="6"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="village-size">
-      <value value="1000"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="annual-production">
-      <value value="5"/>
-      <value value="10"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="exchange-threshold">
-      <value value="2"/>
-      <value value="5"/>
-      <value value="10"/>
     </enumeratedValueSet>
   </experiment>
 </experiments>
