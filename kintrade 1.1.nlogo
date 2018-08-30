@@ -218,6 +218,8 @@ to populate-villages ;This runs from the setup procedure. It populates villages 
         set wife nobody
         set birth-village village-no
         set current-village village-no
+	set pots-owned 0
+	set pots-given 0
        ]
 
   ask females
@@ -232,6 +234,8 @@ to populate-villages ;This runs from the setup procedure. It populates villages 
         set husband nobody
         set birth-village village-no
         set current-village village-no
+	set pots-owned 0
+	set pots-given 0
         move-to one-of patches with [village-no = [current-village] of myself]
       ]
 
@@ -283,6 +287,7 @@ to reproduce
           set father [husband] of myself
           set wife nobody
           set pots-owned 0
+	  set pots-given 0
           create-parent-with mother [set color red]
           create-parent-with father [set color red]
           let brothers other males with [mother != nobody]
@@ -319,6 +324,7 @@ to reproduce
           set father [husband] of myself
           set husband nobody
           set pots-owned 0
+	  set pots-given 0
           create-parent-with mother [set color red]
           create-parent-with father [set color red]
           let brothers males with [mother != nobody]
